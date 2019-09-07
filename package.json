@@ -1,12 +1,16 @@
 {
   "name": "monsters_io",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Multiplayer IO Game Inspired by Pokemon",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config prod.config.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Sentient Ramen",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/https://github.com/SentientRamen/monsters_io.git"
+  }
 }
