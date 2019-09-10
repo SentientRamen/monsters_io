@@ -12,5 +12,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/https://github.com/SentientRamen/monsters_io.git"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0"
   }
 }
