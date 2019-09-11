@@ -1,59 +1,53 @@
-// Dependencies
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var socketIO = require('socket.io');
+const express = require('express');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const socketio = require('socket.io');
 
-var app = express();
-var server = http.Server(app);
-var io = socketIO(server);
+const Constants = require('../shared/constants');
+const Game = require('./game');
+const webpackConfig = require('../../webpack.dev.js');
 
-app.set('port', 5000);
-app.use('/static', express.static(__dirname + '/static'));
+// Setup an Express server
+const app = express();
+app.use(express.static('public'));
 
-// Routing
-app.get('/', function(request, response) {
-  response.sendFile(path.join(__dirname, 'index.html'));
+if (process.env.NODE_ENV === 'development') {
+  // Setup Webpack for development
+  const compiler = webpack(webpackConfig);
+  app.use(webpackDevMiddleware(compiler));
+} else {
+  // Static serve the dist/ folder in production
+  app.use(express.static('dist'));
+}
+
+// Listen on port
+const port = process.env.PORT || 3000;
+const server = app.listen(port);
+console.log(`Server listening on port ${port}`);
+
+// Setup socket.io
+const io = socketio(server);
+
+// Listen for socket.io connections
+io.on('connection', socket => {
+  console.log('Player connected!', socket.id);
+
+  socket.on(Constants.MSG_TYPES.JOIN_GAME, joinGame);
+  socket.on(Constants.MSG_TYPES.INPUT, handleInput);
+  socket.on('disconnect', onDisconnect);
 });
 
-// Starts the server.
-server.listen(5000, function() {
-  console.log('Starting server on port 5000');
-});
+// Setup the Game
+const game = new Game();
 
-// Add the WebSocket handlers
-io.on('connection', function(socket) {
-});
+function joinGame(username) {
+  game.addPlayer(this, username);
+}
 
-setInterval(function() {
-  io.sockets.emit('message', 'hi!');
-}, 1000);
+function handleInput(dir) {
+  game.handleInput(this, dir);
+}
 
-var players = {};
-io.on('connection', function(socket) {
-  socket.on('new player', function() {
-    players[socket.id] = {
-      x: 300,
-      y: 300
-    };
-  });
-  socket.on('movement', function(data) {
-    var player = players[socket.id] || {};
-    if (data.left) {
-      player.x -= 5;
-    }
-    if (data.up) {
-      player.y -= 5;
-    }
-    if (data.right) {
-      player.x += 5;
-    }
-    if (data.down) {
-      player.y += 5;
-    }
-  });
-});
-
-setInterval(function() {
-  io.sockets.emit('state', players);
-}, 1000 / 60);
+function onDisconnect() {
+  game.removePlayer(this);
+}
