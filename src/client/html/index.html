@@ -1,53 +1,95 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>An example .io game</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" href="/assets/icon64.png">
-  <meta property="description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
-  <meta property="og:title" content="An example .io game">
-  <meta property="og:description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
-  <meta property="og:image" content="/assets/icon1200.png">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58664433-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <title>An example .io game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="/public/assets/icon64.png">
+    <meta property="description"
+          content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+    <meta property="og:title" content="An example .io game">
+    <meta property="og:description"
+          content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+    <meta property="og:image" content="/assets/icon1200.png">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58664433-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'UA-58664433-3');
-  </script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-58664433-3');
+    </script>
 </head>
 <body>
-  <canvas id="game-canvas"></canvas>
-  <div id="play-menu" class="hidden">
+<canvas id="game-canvas"></canvas>
+<div id="play-menu" class="hidden">
     <h1>An example .io game</h1>
     <p>
-      Stay alive and shoot other players.
-      <br />
-      Use your mouse to move.
+        Stay alive and shoot other players.
+        <br/>
+        Use your mouse to move.
     </p>
-      <label for="username-input"></label><input type="text" id="username-input" placeholder="Username" />
+    <label for="username-input"></label><input type="text" id="username-input" placeholder="Username"/>
+    <label for="type-input"></label>
+    <select name="monster-type" id="type-input">
+        <option value="normal">normal</option>
+        <option value="fight">fight</option>
+        <option value="flying">flying</option>
+        <option value="poison">poison</option>
+        <option value="ground">ground</option>
+        <option value="rock">rock</option>
+        <option value="bug">bug</option>
+        <option value="ghost">ghost</option>
+        <option value="steel">steel</option>
+        <option value="fire">fire</option>
+        <option value="water">water</option>
+        <option value="grass">grass</option>
+        <option value="electric">electric</option>
+        <option value="psychic">psychic</option>
+        <option value="ice">ice</option>
+        <option value="dragon">dragon</option>
+        <option value="dark">dark</option>
+        <option value="fairy">fairy</option>
+    </select>
     <button id="play-button">PLAY</button>
-  </div>
-  <div id="leaderboard" class="hidden">
+</div>
+<div id="leaderboard" class="hidden">
     <table>
-      <tr>
-        <th>Username</th>
-        <th>Score</th>
-      </tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
-      <tr><td></td><td></td></tr>
+        <tr>
+            <th>Username</th>
+            <th>Score</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
     </table>
-  </div>
-  <div id="disconnect-modal" class="hidden">
+</div>
+<div id="disconnect-modal" class="hidden">
     <div>
-      <h2>Disconnected from Server </h2>
-      <hr />
-      <button id="reconnect-button">RECONNECT</button>
+        <h2>Disconnected from Server </h2>
+        <hr/>
+        <button id="reconnect-button">RECONNECT</button>
     </div>
-  </div>
+</div>
 </body>
 </html>

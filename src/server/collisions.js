@@ -11,10 +11,12 @@ function applyCollisions(players, bullets) {
       const player = players[j];
       if (
         bullet.parentID !== player.id &&
-        player.distanceTo(bullet) <= Constants.PLAYER_RADIUS + Constants.BULLET_RADIUS
+        player.distanceTo(bullet) <= Constants.PLAYER_RADIUS + Constants.BULLET_RADIUS && Constants.TYPE_EFFECTIVE[bullet.type][player.type] !== 0
       ) {
+        bullet.scoreVal = Constants.TYPE_EFFECTIVE[bullet.type][player.type];
         destroyedBullets.push(bullet);
-        player.takeBulletDamage();
+        let val = bullet.scoreVal;
+        player.takeBulletDamage(val);
         break;
       }
     }

@@ -12,13 +12,13 @@ class Game {
     setInterval(this.update.bind(this), 1000 / 60);
   }
 
-  addPlayer(socket, username) {
+  addPlayer(socket, username, type) {
     this.sockets[socket.id] = socket;
 
     // Generate a position to start this player at.
     const x = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
     const y = Constants.MAP_SIZE * (0.25 + Math.random() * 0.5);
-    this.players[socket.id] = new Player(socket.id, username, x, y);
+    this.players[socket.id] = new Player(socket.id, username, x, y, type);
   }
 
   removePlayer(socket) {
@@ -61,7 +61,7 @@ class Game {
     const destroyedBullets = applyCollisions(Object.values(this.players), this.bullets);
     destroyedBullets.forEach(b => {
       if (this.players[b.parentID]) {
-        this.players[b.parentID].onDealtDamage();
+        this.players[b.parentID].onDealtDamage(b.scoreVal);
       }
     });
     this.bullets = this.bullets.filter(bullet => !destroyedBullets.includes(bullet));
