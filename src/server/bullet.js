@@ -4,11 +4,10 @@ const Constants = require('../shared/constants');
 
 class Bullet extends ObjectClass {
   constructor(parentID,init_x,init_y, x, y, dir,type) {
-    super(shortid(), x, y, dir, Constants.BULLET_SPEED);
+    super(shortid(), x, y, type, dir, Constants.BULLET_SPEED);
     this.parentID = parentID;
     this.init_x = init_x;
     this.init_y = init_y;
-    this.type = type;
     this.scoreVal = 1;
   }
 

@@ -82,7 +82,7 @@ class Game {
       Object.keys(this.sockets).forEach(playerID => {
         const socket = this.sockets[playerID];
         const player = this.players[playerID];
-        socket.emit(Constants.MSG_TYPES.GAME_UPDATE, this.createUpdate(player, leaderboard));
+        socket.emit(Constants.MSG_TYPES.GAME_UPDATE, JSON.stringify(this.createUpdate(player, leaderboard)));
       });
       this.shouldSendUpdate = false;
     } else {

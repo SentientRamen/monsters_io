@@ -99,9 +99,9 @@ function renderPlayer(me, player) {
 }
 
 function renderBullet(me, bullet) {
-  const { x, y } = bullet;
+  const { x, y} = bullet;
   context.drawImage(
-    getAsset('bullet.svg'),
+    getAsset(bullet.type+'.svg'),
     canvas.width / 2 + x - me.x - BULLET_RADIUS,
     canvas.height / 2 + y - me.y - BULLET_RADIUS,
     BULLET_RADIUS * 2,

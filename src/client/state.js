@@ -16,6 +16,7 @@ export function initState() {
 }
 
 export function processGameUpdate(update) {
+  update = JSON.parse(update);
   if (!firstServerTimestamp) {
     firstServerTimestamp = update.t;
     gameStart = Date.now();
@@ -64,6 +65,7 @@ export function getCurrentState() {
     const baseUpdate = gameUpdates[base];
     const next = gameUpdates[base + 1];
     const ratio = (serverTime - baseUpdate.t) / (next.t - baseUpdate.t);
+
     return {
       me: interpolateObject(baseUpdate.me, next.me, ratio),
       others: interpolateObjectArray(baseUpdate.others, next.others, ratio),
@@ -80,9 +82,19 @@ function interpolateObject(object1, object2, ratio) {
   const interpolated = {};
   Object.keys(object1).forEach(key => {
     if (key === 'direction') {
-      interpolated[key] = interpolateDirection(object1[key], object2[key], ratio);
+      if(typeof object1[key] !== "string"){
+        interpolated[key] = interpolateDirection(object1[key], object2[key], ratio);
+      }
+      else {
+        interpolated[key] = object1[key];
+      }
     } else {
-      interpolated[key] = object1[key] + (object2[key] - object1[key]) * ratio;
+      if(typeof object1[key] !== "string") {
+        interpolated[key] = object1[key] + (object2[key] - object1[key]) * ratio;
+      }
+      else {
+        interpolated[key] = object1[key];
+      }
     }
   });
   return interpolated;

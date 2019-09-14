@@ -1,8 +1,9 @@
 class Object {
-  constructor(id, x, y, dir, speed) {
+  constructor(id, x, y, type, dir, speed) {
     this.id = id;
     this.x = x;
     this.y = y;
+    this.type = type;
     this.direction = dir;
     this.speed = speed;
   }
@@ -27,6 +28,7 @@ class Object {
       id: this.id,
       x: this.x,
       y: this.y,
+      type: this.type
     };
   }
 }

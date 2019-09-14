@@ -1,0 +1,22 @@
+<svg width="8.0000001" height="8.0000001" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter color-interpolation-filters="sRGB" x="-0.144" y="-0.144" width="1.288" height="1.288" id="filter4147">
+   <feGaussianBlur stdDeviation="0.36" id="feGaussianBlur4149"/>
+  </filter>
+  <radialGradient r="0.5" cy="0.5" cx="0.5" spreadMethod="pad" id="svg_2">
+   <stop offset="0" stop-opacity="0.996094" stop-color="#000000"/>
+   <stop offset="1" stop-opacity="0.996094" stop-color="#7f007f"/>
+  </radialGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g fill="#fff" id="layer1">
+   <circle fill="url(#svg_2)" r="2.1168" cy="3.999976" cx="4" id="path4138"/>
+   <path fill="url(#svg_2)" filter="url(#filter4147)" d="m4,0.827416c-1.741068,0 -3.1752,1.434111 -3.1752,3.1752s1.434132,3.1752 3.1752,3.1752s3.1752,-1.434111 3.1752,-3.1752s-1.434132,-3.1752 -3.1752,-3.1752zm0,2.1168c0.597075,0 1.0584,0.46137 1.0584,1.0584c0,0.597159 -0.461325,1.0584 -1.0584,1.0584s-1.0584,-0.461241 -1.0584,-1.0584c0,-0.59703 0.461325,-1.0584 1.0584,-1.0584z" id="circle4142"/>
+  </g>
+ </g>
+</svg>
