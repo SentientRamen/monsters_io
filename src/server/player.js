@@ -7,8 +7,10 @@ class Player extends ObjectClass {
     super(id, x, y, type,Math.random() * 2 * Math.PI, Constants.PLAYER_SPEED);
     this.username = username;
     this.hp = Constants.PLAYER_MAX_HP;
+    this.lvl = 1;
     this.fireCooldown = 0;
     this.score = 0;
+    this.exp = 10;
   }
 
   // Returns a newly created bullet, or null.
@@ -45,6 +47,8 @@ class Player extends ObjectClass {
       ...(super.serializeForUpdate()),
       direction: this.direction,
       hp: this.hp,
+      lvl: this.lvl,
+      exp: this.exp,
     };
   }
 }
