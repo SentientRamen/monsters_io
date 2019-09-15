@@ -1,3 +1,3 @@
 //Procfile
 
-web: npm run start
+web: cross-env NODE_ENV=production node src/server/server.js
