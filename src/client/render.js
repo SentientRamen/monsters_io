@@ -106,30 +106,38 @@ function renderPlayer(me, player) {
         2,
     );
 
-    let level = player.lvl + 1;
-    let currMaxExp = 0;
-    if (level > 100) {
-        level = 100;
-    }
-    if (level <= 50) {
-        currMaxExp = (level ** 3 * (100 - level)) / 50;
-    } else if (level <= 68) {
-        currMaxExp = (level ** 3 * (150 - level)) / 100;
-    } else if (level <= 98) {
-        currMaxExp = (level ** 3 * ((1911 - 10 * level) / 3) ) / 500;
+    let baseExp;
+    if ( player.lvl <= 50) {
+        baseExp = (player.lvl ** 3 * (100 - player.lvl)) / 50;
+    } else if (player.lvl <= 68) {
+        baseExp = (player.lvl ** 3 * (150 - player.lvl)) / 100;
+    } else if (player.lvl <= 98) {
+        baseExp = (player.lvl ** 3 * ((1911 - 10 * player.lvl) / 3)) / 500;
     } else {
-        currMaxExp = (level ** 3 * (160 - level)) / 100;
+        baseExp = (player.lvl ** 3 * (160 - player.lvl)) / 100;
+    }
+
+
+
+    let currExp = player.experience - baseExp;
+    let maxExp = player.currMaxExp - baseExp;
+
+    console.log(baseExp, currExp, maxExp);
+
+    if (player.lvl === 100) {
+        currExp = maxExp;
     }
 
     context.fillStyle = 'blue';
     context.fillRect(
-        canvasX - PLAYER_RADIUS ,
+        canvasX - PLAYER_RADIUS,
         canvasY + PLAYER_RADIUS + 16,
-        PLAYER_RADIUS * 2 * (1 - player.exp /currMaxExp),
+        PLAYER_RADIUS * 2 * (currExp / maxExp),
         2,
     );
 
     // Draw lvl
+    context.fillStyle = 'white';
     context.font = "bold 15px Verdana";
     context.textAlign = "center";
     context.fillText(

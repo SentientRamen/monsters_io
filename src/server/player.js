@@ -10,7 +10,8 @@ class Player extends ObjectClass {
     this.lvl = 1;
     this.fireCooldown = 0;
     this.score = 0;
-    this.exp = 10;
+    this.exp = 2;
+    this.currMaxExp = 0;
   }
 
   // Returns a newly created bullet, or null.
@@ -38,8 +39,35 @@ class Player extends ObjectClass {
     this.hp -= Math.round(Constants.BULLET_DAMAGE * val);
   }
 
+  getMaxLevel(lvl) {
+    let level = lvl + 1;
+    let currMaxExp = 0;
+    if (level > 100) {
+        level = 100;
+    }
+    if (level <= 50) {
+        currMaxExp = (level ** 3 * (100 - level)) / 50;
+    } else if (level <= 68) {
+        currMaxExp = (level ** 3 * (150 - level)) / 100;
+    } else if (level <= 98) {
+        currMaxExp = (level ** 3 * ((1911 - 10 * level) / 3)) / 500;
+    } else {
+        currMaxExp = (level ** 3 * (160 - level)) / 100;
+    }
+
+    return currMaxExp;
+  }
+
   onDealtDamage(val) {
+    let currExp = this.getMaxLevel(this.lvl);
     this.score += Math.round(Constants.SCORE_BULLET_HIT * val);
+    if (this.lvl < 100) {
+      this.exp += 20 * (1 / (val + 1));
+    }
+    if(this.exp > currExp && this.lvl < 100) {
+      this.lvl += 1;
+    }
+    this.currMaxExp = this.getMaxLevel(this.lvl);
   }
 
   serializeForUpdate() {
@@ -48,7 +76,8 @@ class Player extends ObjectClass {
       direction: this.direction,
       hp: this.hp,
       lvl: this.lvl,
-      exp: this.exp,
+      experience: this.exp,
+      currMaxExp: this.currMaxExp,
     };
   }
 }
