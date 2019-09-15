@@ -6,6 +6,7 @@ class Player extends ObjectClass {
   constructor(id, username, x, y,type) {
     super(id, x, y, type,Math.random() * 2 * Math.PI, Constants.PLAYER_SPEED);
     this.username = username;
+    this.maxHp = Constants.PLAYER_MAX_HP;
     this.hp = Constants.PLAYER_MAX_HP;
     this.lvl = 1;
     this.fireCooldown = 0;
@@ -29,7 +30,7 @@ class Player extends ObjectClass {
     this.fireCooldown -= dt;
     if (this.fireCooldown <= 0) {
       this.fireCooldown += Constants.PLAYER_FIRE_COOLDOWN;
-      return new Bullet(this.id, this.x, this.y, this.x, this.y, this.direction,this.type);
+      return new Bullet(this.id, this.x, this.y, this.x, this.y, this.direction,this.type,this.lvl);
     }
 
     return null;
@@ -66,6 +67,8 @@ class Player extends ObjectClass {
     }
     if(this.exp > currExp && this.lvl < 100) {
       this.lvl += 1;
+      this.hp = Constants.PLAYER_MAX_HP * Math.round(1+ this.lvl/20);
+      this.maxHp = Constants.PLAYER_MAX_HP * Math.round(1+ this.lvl/20);
     }
     this.currMaxExp = this.getMaxLevel(this.lvl);
   }
@@ -74,6 +77,7 @@ class Player extends ObjectClass {
     return {
       ...(super.serializeForUpdate()),
       direction: this.direction,
+      maxHp: this.maxHp,
       hp: this.hp,
       lvl: this.lvl,
       experience: this.exp,

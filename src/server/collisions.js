@@ -15,7 +15,7 @@ function applyCollisions(players, bullets) {
       ) {
         bullet.scoreVal = Constants.TYPE_EFFECTIVE[bullet.type][player.type];
         destroyedBullets.push(bullet);
-        let val = bullet.scoreVal;
+        let val = bullet.scoreVal * (1 + bullet.lvl/20);
         player.takeBulletDamage(val);
         break;
       }

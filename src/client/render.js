@@ -91,9 +91,9 @@ function renderPlayer(me, player) {
     );
     context.fillStyle = 'black';
     context.fillRect(
-        canvasX - PLAYER_RADIUS + PLAYER_RADIUS * 2 * player.hp / PLAYER_MAX_HP,
+        canvasX - PLAYER_RADIUS + PLAYER_RADIUS * 2 * player.hp / player.maxHp,
         canvasY + PLAYER_RADIUS + 8,
-        PLAYER_RADIUS * 2 * (1 - player.hp / PLAYER_MAX_HP),
+        PLAYER_RADIUS * 2 * (1 - player.hp / player.maxHp),
         2,
     );
 
@@ -121,8 +121,6 @@ function renderPlayer(me, player) {
 
     let currExp = player.experience - baseExp;
     let maxExp = player.currMaxExp - baseExp;
-
-    console.log(baseExp, currExp, maxExp);
 
     if (player.lvl === 100) {
         currExp = maxExp;

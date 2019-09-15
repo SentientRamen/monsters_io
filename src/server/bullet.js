@@ -3,12 +3,13 @@ const ObjectClass = require('./object');
 const Constants = require('../shared/constants');
 
 class Bullet extends ObjectClass {
-  constructor(parentID,init_x,init_y, x, y, dir,type) {
+  constructor(parentID,init_x,init_y, x, y, dir,type,lvl) {
     super(shortid(), x, y, type, dir, Constants.BULLET_SPEED);
     this.parentID = parentID;
     this.init_x = init_x;
     this.init_y = init_y;
     this.scoreVal = 1;
+    this.lvl = lvl;
   }
 
   // Returns true if the bullet should be destroyed
