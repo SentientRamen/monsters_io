@@ -82,17 +82,32 @@ function renderPlayer(me, player) {
   context.restore();
 
   // Draw health bar
-  context.fillStyle = 'white';
+  context.fillStyle = 'red';
   context.fillRect(
     canvasX - PLAYER_RADIUS,
     canvasY + PLAYER_RADIUS + 8,
     PLAYER_RADIUS * 2,
     2,
   );
-  context.fillStyle = 'red';
+  context.fillStyle = 'black';
   context.fillRect(
     canvasX - PLAYER_RADIUS + PLAYER_RADIUS * 2 * player.hp / PLAYER_MAX_HP,
     canvasY + PLAYER_RADIUS + 8,
+    PLAYER_RADIUS * 2 * (1 - player.hp / PLAYER_MAX_HP),
+    2,
+  );
+
+  context.fillStyle = 'white';
+  context.fillRect(
+    canvasX - PLAYER_RADIUS,
+    canvasY + PLAYER_RADIUS + 16,
+    PLAYER_RADIUS * 2,
+    2,
+  );
+  context.fillStyle = 'blue';
+  context.fillRect(
+    canvasX - PLAYER_RADIUS + PLAYER_RADIUS * 2 * player.hp / PLAYER_MAX_HP,
+    canvasY + PLAYER_RADIUS + 16,
     PLAYER_RADIUS * 2 * (1 - player.hp / PLAYER_MAX_HP),
     2,
   );
